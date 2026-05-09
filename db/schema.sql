@@ -1,6 +1,9 @@
--- ProjectFlow schema. Run in Supabase SQL editor in order.
--- Idempotent-ish: drops constraints/tables only if you uncomment the
--- corresponding line. By default, just creates.
+-- ProjectFlow schema. Run in the Supabase SQL Editor.
+-- Note on RLS: this app does its own authn/authz at the API layer (custom
+-- JWT, see lib/auth.ts). We use the publishable (anon) key purely as a
+-- transport key — every privileged check happens in our route handlers.
+-- So we explicitly disable Row Level Security on these tables. If you wire
+-- this app to Supabase Auth later, replace the disables with proper policies.
 
 -- 1. USERS
 create table if not exists users (
@@ -49,7 +52,13 @@ create table if not exists tasks (
   updated_at timestamptz default now()
 );
 
--- Helpful indexes for the queries we actually run
+-- Indexes for the queries we actually run
 create index if not exists idx_tasks_project on tasks(project_id);
 create index if not exists idx_tasks_assignee on tasks(assignee_id);
 create index if not exists idx_project_members_user on project_members(user_id);
+
+-- Disable RLS — see the note at the top of this file.
+alter table users disable row level security;
+alter table projects disable row level security;
+alter table project_members disable row level security;
+alter table tasks disable row level security;
