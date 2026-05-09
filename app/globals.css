@@ -1,26 +1,76 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: 15 17 23;
+  --surface: 26 29 39;
+  --card: 30 33 48;
+  --border: 42 45 62;
+  --foreground: 232 234 240;
+  --muted: 107 114 128;
+
+  --primary: 245 158 11;
+  --primary-hover: 217 119 6;
+  --primary-foreground: 24 24 27;
+
+  --success: 16 185 129;
+  --warning: 245 158 11;
+  --danger: 239 68 68;
+  --info: 59 130 246;
+
+  --ring: 245 158 11;
+  --radius: 0.5rem;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-background: rgb(var(--background));
+  --color-surface: rgb(var(--surface));
+  --color-card: rgb(var(--card));
+  --color-border: rgb(var(--border));
+  --color-foreground: rgb(var(--foreground));
+  --color-muted: rgb(var(--muted));
+
+  --color-primary: rgb(var(--primary));
+  --color-primary-hover: rgb(var(--primary-hover));
+  --color-primary-foreground: rgb(var(--primary-foreground));
+
+  --color-success: rgb(var(--success));
+  --color-warning: rgb(var(--warning));
+  --color-danger: rgb(var(--danger));
+  --color-info: rgb(var(--info));
+
+  --color-ring: rgb(var(--ring));
+
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 2px);
+
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html, body {
+  background: rgb(var(--background));
+  color: rgb(var(--foreground));
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-feature-settings: "cv11", "ss01";
+  font-synthesis-weight: none;
+  text-rendering: optimizeLegibility;
 }
+
+::selection {
+  background: rgb(var(--primary) / 0.35);
+  color: rgb(var(--foreground));
+}
+
+/* subtle scrollbar */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: rgb(var(--border));
+  border-radius: 6px;
+  border: 2px solid rgb(var(--background));
+}
+::-webkit-scrollbar-thumb:hover { background: rgb(var(--muted) / 0.5); }
