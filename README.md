@@ -161,8 +161,7 @@ All routes are under `/api`. Auth is cookie-based — the login/register endpoin
 - `MEMBER` role cannot change anything on a task except its own `status` field. Trying to send any other field returns a 403.
 - The `/api/users` endpoint without `admin=1` is intentionally open to all authenticated users so the member-picker dropdown works without requiring admin access.
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Deployed on Railway
+This is the Live project link [Project Url](https://etharaaiassignment-production-079c.up.railway.app/login)
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
